@@ -1,12 +1,12 @@
 import "./App.css";
-import Todo from "./components/Todo/Todo";
 import { TodoProvider } from "./providers";
+import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
     <div className="bg-slate-800 w-full h-[100vh] flex items-center justify-center">
       <TodoProvider>
-        <Todo />
+        <AppRouter />
       </TodoProvider>
     </div>
   );
