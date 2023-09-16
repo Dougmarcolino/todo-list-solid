@@ -1,4 +1,3 @@
-import "./App.css";
 import { TodoProvider } from "./providers";
 import AppRouter from "./router/AppRouter";
 
