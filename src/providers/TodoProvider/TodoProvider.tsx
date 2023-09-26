@@ -1,8 +1,15 @@
 import { ReactNode, createContext, useState } from "react";
 
+type ITask = {
+  id: string;
+  taskDescription: string;
+  isTaskDone: boolean;
+  createdAt: Date;
+};
+
 type ITodoContext = {
-  value?: string;
-  setValue?: React.Dispatch<React.SetStateAction<string>>;
+  tasks?: ITask[];
+  setTasks?: React.Dispatch<React.SetStateAction<ITask[]>>;
 };
 
 type ITodoProviderProps = {
@@ -12,10 +19,10 @@ type ITodoProviderProps = {
 export const TodoContext = createContext<ITodoContext>({});
 
 export const TodoProvider = ({ children }: ITodoProviderProps) => {
-  const [value, setValue] = useState<string>("");
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
   return (
-    <TodoContext.Provider value={{ value, setValue }}>
+    <TodoContext.Provider value={{ tasks, setTasks }}>
       {children}
     </TodoContext.Provider>
   );
