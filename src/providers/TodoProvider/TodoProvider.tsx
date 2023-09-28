@@ -1,15 +1,9 @@
 import { ReactNode, createContext, useState } from "react";
-
-type ITask = {
-  id: string;
-  taskDescription: string;
-  isTaskDone: boolean;
-  createdAt: Date;
-};
+import { ITaskDTO } from "../../api/models/dtos/ITaskDTO";
 
 type ITodoContext = {
-  tasks?: ITask[];
-  setTasks?: React.Dispatch<React.SetStateAction<ITask[]>>;
+  tasks?: ITaskDTO[];
+  setTasks?: React.Dispatch<React.SetStateAction<ITaskDTO[]>>;
 };
 
 type ITodoProviderProps = {
@@ -19,7 +13,7 @@ type ITodoProviderProps = {
 export const TodoContext = createContext<ITodoContext>({});
 
 export const TodoProvider = ({ children }: ITodoProviderProps) => {
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [tasks, setTasks] = useState<ITaskDTO[]>([]);
 
   return (
     <TodoContext.Provider value={{ tasks, setTasks }}>
