@@ -13,7 +13,7 @@ export const list = (axiosRequestConfig?: AxiosRequestConfig) => {
   const aborter = new AbortController();
 
   const response = appAxios
-    .get<ITaskDTO>(URLS.list, {
+    .get<ITaskDTO[]>(URLS.list, {
       signal: aborter.signal,
       ...axiosRequestConfig,
     })
