@@ -3,7 +3,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { useTodo } from "../../../hooks";
 
 export const Body: React.FC = () => {
-  const { tasks, isLoading } = useTodo();
+  const { tasks, isLoading, addTask } = useTodo();
   return (
     <div className="bg-pink-100 h-[400px] w-[400px] rounded-lg drop-shadow-md relative">
       <div className="w-full h-full px-16 py-8">
@@ -21,7 +21,7 @@ export const Body: React.FC = () => {
           ))}
       </div>
       <div className="absolute -bottom-6 flex justify-center w-full">
-        <ButtonInput label="Add" />
+        <ButtonInput label="Add" onSubmit={(taskName) => addTask(taskName)} />
       </div>
     </div>
   );

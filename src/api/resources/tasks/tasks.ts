@@ -24,3 +24,19 @@ export const list = (axiosRequestConfig?: AxiosRequestConfig) => {
     response,
   };
 };
+
+export const create = (
+  task: ITaskDTO,
+  axiosRequestConfig?: AxiosRequestConfig
+) => {
+  const aborter = new AbortController();
+
+  const response = appAxios
+    .post<ITaskDTO>(URLS.create, task, {
+      signal: aborter.signal,
+      ...axiosRequestConfig,
+    })
+    .then((res) => res);
+
+  return response;
+};
