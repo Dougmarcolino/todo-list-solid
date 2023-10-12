@@ -2,13 +2,15 @@ type ICheckbox = {
   checked?: boolean;
   id: string;
   label: string;
+  onCheck: (value: boolean) => void;
 };
 
-export const Checkbox = ({ checked, id, label }: ICheckbox) => {
+export const Checkbox = ({ checked, id, label, onCheck }: ICheckbox) => {
   return (
     <div className="flex justify-center items-center">
       <input
-        checked={checked}
+        defaultChecked={checked}
+        onChange={(e) => onCheck(e.target.checked)}
         type="checkbox"
         id={id}
         className="

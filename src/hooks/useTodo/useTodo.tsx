@@ -5,7 +5,7 @@ import { ITaskDTO } from "../../api/models";
 
 export const useTodo = () => {
   const { setTasks, tasks } = useContext(TodoContext);
-  const { useTasksList, createTask, removeTask } = useTodoQuery();
+  const { useTasksList, createTask, removeTask, updateTask } = useTodoQuery();
 
   const { data, isLoading } = useTasksList();
 
@@ -24,7 +24,22 @@ export const useTodo = () => {
   };
 
   const onRemoveTask = (taskId: ITaskDTO["id"]) => {
+    const changedTasks = tasks?.filter((task) => task.id !== taskId);
+
+    setTasks && setTasks(changedTasks as ITaskDTO[]);
     removeTask.mutate(taskId);
+  };
+
+  const onCheckTask = (
+    taskId: ITaskDTO["id"],
+    isChecked: ITaskDTO["isTaskDone"]
+  ) => {
+    const changedTasks = tasks?.map((task) =>
+      task.id === taskId ? { ...task, isTaskDone: isChecked } : task
+    );
+
+    setTasks && setTasks(changedTasks as ITaskDTO[]);
+    updateTask.mutate({ taskId, isTaskDone: isChecked });
   };
 
   return {
@@ -32,6 +47,7 @@ export const useTodo = () => {
     tasks,
     onCreateTask,
     onRemoveTask,
+    onCheckTask,
     isLoading,
   };
 };

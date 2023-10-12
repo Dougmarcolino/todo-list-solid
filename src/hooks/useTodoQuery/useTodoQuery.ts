@@ -29,9 +29,22 @@ export const useTodoQuery = () => {
     },
   });
 
+  const updateTask = useMutation(
+    (variables: {
+      taskId: ITaskDTO["id"];
+      isTaskDone: ITaskDTO["isTaskDone"];
+    }) => API.Task.update(variables.taskId, variables.isTaskDone),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["useTasksList"] });
+      },
+    }
+  );
+
   return {
     useTasksList,
     createTask,
     removeTask,
+    updateTask,
   };
 };

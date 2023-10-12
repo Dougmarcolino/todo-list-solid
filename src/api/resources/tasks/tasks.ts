@@ -56,3 +56,24 @@ export const remove = (
 
   return response;
 };
+
+export const update = (
+  taskId: ITaskDTO["id"],
+  isTaskDone: ITaskDTO["isTaskDone"],
+  axiosRequestConfig?: AxiosRequestConfig
+) => {
+  const aborter = new AbortController();
+
+  const response = appAxios
+    .patch<ITaskDTO>(
+      URLS.update(taskId),
+      { isTaskDone },
+      {
+        signal: aborter.signal,
+        ...axiosRequestConfig,
+      }
+    )
+    .then((res) => res);
+
+  return response;
+};
