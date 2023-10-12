@@ -1,6 +1,6 @@
 # ToDo
 
-This is a small beatifull to-do list project I put together in onder to practice React Query and Tailwind CSS.
+This is a small beautiful to-do list project I put together in onder to practice React Query and Tailwind CSS.
 
 # Getting Started
 
