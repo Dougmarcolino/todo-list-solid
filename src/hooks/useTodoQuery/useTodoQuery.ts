@@ -20,8 +20,18 @@ export const useTodoQuery = () => {
     },
   });
 
+  const removeTask = useMutation({
+    mutationFn: (taskId: ITaskDTO["id"]) => {
+      return API.Task.remove(taskId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["useTasksList"] });
+    },
+  });
+
   return {
     useTasksList,
     createTask,
+    removeTask,
   };
 };

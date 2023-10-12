@@ -40,3 +40,19 @@ export const create = (
 
   return response;
 };
+
+export const remove = (
+  taskId: ITaskDTO["id"],
+  axiosRequestConfig?: AxiosRequestConfig
+) => {
+  const aborter = new AbortController();
+
+  const response = appAxios
+    .delete<ITaskDTO>(URLS.delete(taskId), {
+      signal: aborter.signal,
+      ...axiosRequestConfig,
+    })
+    .then((res) => res);
+
+  return response;
+};

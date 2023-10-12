@@ -5,15 +5,15 @@ import { ITaskDTO } from "../../api/models";
 
 export const useTodo = () => {
   const { setTasks, tasks } = useContext(TodoContext);
-  const { useTasksList, createTask } = useTodoQuery();
+  const { useTasksList, createTask, removeTask } = useTodoQuery();
 
   const { data, isLoading } = useTasksList();
+
   useEffect(() => {
     setTasks && setTasks(data?.data ?? []);
   }, [setTasks, data]);
 
-  const addTask = (taskName: string) => {
-    console.log(taskName, "taskName");
+  const onCreateTask = (taskName: string) => {
     const task: ITaskDTO = {
       taskDescription: taskName,
       isTaskDone: false,
@@ -23,10 +23,15 @@ export const useTodo = () => {
     createTask.mutate(task);
   };
 
+  const onRemoveTask = (taskId: ITaskDTO["id"]) => {
+    removeTask.mutate(taskId);
+  };
+
   return {
     setTasks,
     tasks,
-    addTask,
+    onCreateTask,
+    onRemoveTask,
     isLoading,
   };
 };

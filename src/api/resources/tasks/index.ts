@@ -1,1 +1,1 @@
-export { list, create } from "./tasks";
+export { list, create, remove } from "./tasks";
